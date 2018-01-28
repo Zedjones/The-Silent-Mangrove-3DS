@@ -38,5 +38,3 @@ function entity:changeLife(offset)
 		self.alive = false 
 	end 
 end 
-	
-
