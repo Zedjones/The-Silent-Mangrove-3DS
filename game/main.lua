@@ -3,7 +3,7 @@ require 'classes.entity'
 require 'classes.trabbit'
 require 'classes.entities.chest'
 require 'classes.entities.door'
-require 'classes.entities.
+require 'classes.entities.heart'
 
 function love.load()
 	player = trabbit:new(0, 0)
