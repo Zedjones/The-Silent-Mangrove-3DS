@@ -28,6 +28,10 @@ function entity:isInvincible()
 	return self.invincible
 end
 
+function entity:getPosition()
+	return self.x, self.y
+end
+
 function entity:changeLife(offset)
 	if self.invincible then
 		return
@@ -38,5 +42,3 @@ function entity:changeLife(offset)
 		self.alive = false 
 	end 
 end 
-	
-
