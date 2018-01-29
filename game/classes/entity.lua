@@ -32,6 +32,10 @@ function entity:getPosition()
 	return self.x, self.y
 end
 
+function entity:getDimensions()
+	return self.width, self.length
+end
+
 function entity:changeLife(offset)
 	if self.invincible then
 		return
