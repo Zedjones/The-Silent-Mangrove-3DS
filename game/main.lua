@@ -28,10 +28,14 @@ function love.draw()
 	love.graphics.setColor(255, 255, 255)
 	objects["door1"]:draw()
 	objects["door2"]:draw()	
-	if #collision == 0 then 
-		love.graphics.print("No collision", 100, 200, 100)  
+	if testDown then 
+		love.graphics.print("A is down", 100, 200, 100)
 	else
-		love.graphics.print("Collision", 100, 200, 100)
+		if #collision == 0 then 
+			love.graphics.print("No collision", 100, 200, 100)  
+		else
+			love.graphics.print("Collision", 100, 200, 100)
+		end
 	end
 	love.graphics.setColor(255, 255, 255)
 	love.graphics.print(player:getName(), 100, 100, 100)
@@ -43,4 +47,5 @@ function love.update(dt)
 	x, y = objects["door1"]:getPosition()
 	width, length = objects["door1"]:getDimensions()
 	collision = checkrectangle(x, y, width, length, {"door2"}, self)
+	testDown = love.keyboard.isDown("a")
 end
