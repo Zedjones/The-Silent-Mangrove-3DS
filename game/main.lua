@@ -35,21 +35,25 @@ function love.draw()
 	if testDown then 
 		love.graphics.print("A is down", 100, 200, 100)
 	else
-		if #collision == 0 then 
-			love.graphics.print("No collision", 100, 200, 100)  
+		if #collision > 0 then 
+			love.graphics.print("Collision", 100, 200, 100)  
 		else
-			love.graphics.print("Collision", 100, 200, 100)
+			love.graphics.print("No collision", 100, 200, 100)
 		end
 	end
 	love.graphics.setColor(255, 255, 255)
 	love.graphics.print(player:getName(), 100, 100, 100)
 	love.graphics.setScreen('bottom')
 	love.graphics.print(tostring(chest_test:isInvincible()), 100, 100)
+	love.graphics.print(x .. " " .. y .. " " .. width .. " " .. length, 100, 10)
+	love.graphics.print(tx .. " " .. ty .. " " .. twidth .. " " .. tlength, 100, 30)
 end
 
 function love.update(dt)
-	x, y = objects["door1"]:getPosition()
-	width, length = objects["door1"]:getDimensions()
-	collision = checkrectangle(x, y, width, length, {"door2"}, self)
+	x, y = objects["door2"]:getPosition()
+	width, length = objects["door2"]:getDimensions()
+	tx, ty = objects["trabbit"]:getPosition() 
+	twidth, tlength = objects["trabbit"]:getDimensions()
+	collision = checkrectangle(x, y, width*2, length*2, {"trabbit"})
 	testDown = love.keyboard.isDown("a")
 end

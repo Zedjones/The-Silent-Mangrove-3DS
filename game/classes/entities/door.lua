@@ -8,6 +8,8 @@ function door:init(x, y)
 
 	self.length = 18
 	self.width = 8
+
+	self.active = true
 end
 
 function door:setNextArea(area)

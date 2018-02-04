@@ -5,7 +5,11 @@ local turtleMovementStates = {{}}
 function trabbit:init(x, y)
 	entity.init(self, x, y)
 
+	self.width = 38
+	self.length = 30
+
 	self.isFlipped = false
+	self.active = true
 end
 
 function trabbit:draw()
