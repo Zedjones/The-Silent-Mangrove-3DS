@@ -15,9 +15,12 @@ function love.load()
 	door_test1:setImage(love.graphics.newImage("graphics/door.png"))
 	door_test2 = door:new(20, 10)
 	door_test2:setImage(love.graphics.newImage("graphics/door.png"))
+	trabbit_test = trabbit:new(200, 200)
+	trabbit_test:setImage(love.graphics.newImage("graphics/bunnyTest.png"))
 	objects = {}
 	objects["door1"] = door_test1
 	objects["door2"] = door_test2
+	objects["trabbit"] = trabbit_test
 end 
 
 function love.draw()
@@ -27,7 +30,8 @@ function love.draw()
 	love.graphics.rectangle("fill", 0, 0, 400, 240)
 	love.graphics.setColor(255, 255, 255)
 	objects["door1"]:draw()
-	objects["door2"]:draw()	
+	objects["door2"]:draw()
+	objects["trabbit"]:draw()
 	if testDown then 
 		love.graphics.print("A is down", 100, 200, 100)
 	else

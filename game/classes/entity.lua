@@ -46,3 +46,15 @@ function entity:changeLife(offset)
 		self.alive = false 
 	end 
 end 
+
+function entity:setImage(image)
+	self.image = image 
+end
+
+function entity:getImage()
+	return self.image
+end
+
+function entity:draw()
+	love.graphics.draw(self.image, self.x, self.y)
+end
