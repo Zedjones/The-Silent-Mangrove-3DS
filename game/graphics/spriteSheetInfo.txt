@@ -1,0 +1,107 @@
+Dimensions for the sprite sheet
+	Trabbit
+
+		Breath1
+			0, 1, 38, 30
+		Breath2
+			35, 0, 38, 31
+		Breath3 (same as Breath1)
+			71, 1, 38, 30
+		Breath4
+			109, 2, 38, 29
+
+		Walking1
+			0, 32, 38, 30
+		Walking2
+			35, 32, 37, 30
+		Walking3
+			74, 32, 38, 30
+		Walking4
+			109, 33, 34, 30
+
+		Jump1
+			0, 65, 34, 28
+		Jump2
+			34, 65, 35, 28
+		Jump3
+			71, 63, 33, 29 
+		Jump4
+			104, 65, 34, 27
+
+	Chest
+
+		ChestClosed
+			0, 96, 20, 16
+		ChestOpen 
+			21, 96, 20, 17
+
+	Hearts
+
+		HeartsFull
+			44, 95, 17, 8
+		Hearts2
+			62, 95, 17, 8
+		Hearts1
+			80, 95, 17, 8
+		HeartsEmpty
+			98, 95, 17, 8
+
+	Shaman 
+		
+		Shaman1
+			0, 114, 35, 30
+		Shaman2
+			36, 113, 35, 31
+		Shaman3
+			72, 114, 35, 30
+		Shaman4
+			108, 116, 35, 29 
+
+	Shopkeeper
+		
+		Shopkeeper1
+			0, 147, 36, 30
+		Shopkeeper2
+			37, 145, 36, 31
+		Shopkeeper3
+			73, 147, 36, 30	
+		Shopkeeper4
+			109, 148, 36, 29
+
+	Bat 
+
+		BatFlying1
+			0, 178, 24, 20
+		BatFlying2
+			25, 183, 26, 16 
+		BatFlying3
+			54, 178, 21, 23
+		BatFlying4
+			76, 183, 26, 16
+		BatHanging
+			103, 179, 10, 20 
+
+	Crocodile
+		Crocodile1
+			0, 202, 44, 11
+		Crocodile2
+			45, 202, 44, 11
+		Crocodile3
+			90, 202, 44, 11
+		Crocodile4
+			135, 202, 44, 11
+
+	Door
+		0, 215, 24, 33
+
+	Family
+		26, 215, 35, 45
+
+	TallBoi
+		62, 215, 22, 23
+
+	SmolBoi
+		66, 239, 21, 15
+
+	MamaBoi
+		62, 255, 35, 29    	
