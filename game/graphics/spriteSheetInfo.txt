@@ -1,4 +1,5 @@
 Dimensions for the sprite sheet
+	
 	Trabbit
 
 		Breath1
