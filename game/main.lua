@@ -7,7 +7,6 @@ require 'classes.entity'
 require 'classes.trabbit'
 require 'classes.entities.chest'
 require 'classes.entities.door'
-require 'classes.entities.heart'
 
 --[[
 -- Love2D initialization function to set up data needed to start the game 
