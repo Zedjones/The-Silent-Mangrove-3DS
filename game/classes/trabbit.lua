@@ -1,12 +1,13 @@
 trabbit = class("trabbit", entity)
 
-local turtleMovementStates = {{}}
-
 function trabbit:init(x, y)
 	entity.init(self, x, y)
 
 	self.width = 38
 	self.length = 30
+
+	self.walking = {}
+	self.activeFrame = nil
 end
 
 function trabbit:draw()
@@ -32,9 +33,18 @@ function trabbit:draw()
 	end
 
 	if self.isFlipped == false then 
-		entity.draw(self)
+		love.graphics.draw(self.image, self.activeFrame, self.x, self.y)
 	else 
-		love.graphics.draw(self.image, self.x, self.y, rotation, -1, 1)
+		love.graphics.draw(self.image, self.activeFrame, self.x, self.y, rotation, -1, 1)
 	end
 	
+end
+
+function trabbit:setSprites()
+	self.walking[1] = love.graphics.newQuad(0, 1, 38, 30)
+	--self.walking[2] = love.graphics.newQuad(35, 0, 38, 31, this.image:getDimensions())
+	--self.walking[3] = self.walking[1]
+	--self.walking[4] = love.graphics.newQuad(109, 2, 38, 30, this.image:getDimensions())
+
+	self.activeFrame = self.walking[1]
 end

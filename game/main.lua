@@ -10,6 +10,7 @@ require 'classes.entities.door'
 require 'classes.entities.heart'
 
 function love.load()
+	spriteSheet = love.graphics.newImage("graphics/SpriteSheet01.png")
 	player = trabbit:new(0, 0)
 	chest_test = chest:new(0, 0)
 	door_test1 = door:new(10, 10)
@@ -17,7 +18,8 @@ function love.load()
 	door_test2 = door:new(20, 10)
 	door_test2:setImage(love.graphics.newImage("graphics/door.png"))
 	trabbit_test = trabbit:new(200, 200)
-	trabbit_test:setImage(love.graphics.newImage("graphics/bunnyTest.png"))
+	trabbit_test:setImage(spriteSheet)
+	trabbit_test:setSprites()
 	objects = {}
 	objects["door1"] = door_test1
 	objects["door2"] = door_test2

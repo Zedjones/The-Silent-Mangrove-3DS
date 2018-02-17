@@ -9,6 +9,7 @@ function areColliding(entity1, entity2)
 	local bx2 = select(1, entity2:getPosition()) + select(1, entity2:getDimensions())
 	local ax1, ay1 = entity1:getPosition()
 	local bx1, by1 = entity2:getPosition()
+	--subtract appropriate amount if the entity is flipped
 	if entity1:flipped() then 
 		local width1 = entity1:getWidth()
 		ax1 = ax1 - width1
@@ -19,6 +20,7 @@ function areColliding(entity1, entity2)
 		bx1 = bx1 - width2 
 		bx2 = bx2 - width2 
 	end
+	--algorithm for determining a collision 
 	if ax1 < bx2 and ax2 > bx1 and ay1 < by2 and ay2 > by1 then  
 		return true  
 	else 
