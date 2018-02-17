@@ -45,7 +45,7 @@ function trabbit:draw()
 			love.graphics.draw(self.image, self.breathing[self.activeFrame], 
 				math.floor(self.x), math.floor(self.y), rotation, -1, 1)
 		elseif self.currState == self.stateEnum["walking"] then 
-			love.graphics.draw(self.image, self.walking[4], 
+			love.graphics.draw(self.image, self.walking[self.activeFrame], 
 				math.floor(self.x), math.floor(self.y), rotation, -1, 1)
 		end 
 	end
@@ -121,7 +121,6 @@ function trabbit:update()
 	--get current time in seconds 
 	time = math.floor(love.timer.getTime())
 	if time - self.prevTime == 0 then 
-			self.activeFrame = 4
 		return 
 	end
 	--update current frame every second 
@@ -143,13 +142,22 @@ function trabbit:update()
 		end
 	end
 
-	local switched = false 
+	local switched_state = false 
+	local switched_dir = false 
 	if #self.prevInput == 0 and self.currInput["right"] ~= nil then 
-		switched = true 
-	elseif #self.prevInput == 0 and self.currInput["left"] ~= nil then 
-		switched = true
+		switched_state = true
 	end
-	if switched then 
+	if #self.prevInput == 0 and self.currInput["left"] ~= nil then 
+		switched_state = true
+	end
+	if self.prevInput["left"] ~= nil and self.currInput["right"] ~= nil then 
+		switched_dir = true
+	end
+	if self.prevInput["right"] ~= nil and self.currInput["left"] ~= nil then 
+		switched_dir = true
+	end
+
+	if switched_state then 
 		if self.currState ~= self.stateEnum["walking"] then 
 			self.currState = self.stateEnum["walking"]		
 			self.activeFrame = 1 
@@ -159,5 +167,9 @@ function trabbit:update()
 			self.currState = self.stateEnum["breathing"] 
 			self.activeFrame = 1 
 		end
+	end
+
+	if switched_dir then 
+		self.activeFrame = 1
 	end
 end
