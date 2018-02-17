@@ -6,7 +6,7 @@ function trabbit:init(x, y)
 	self.width = 38
 	self.length = 30
 
-	self.walking = {}
+	self.breathing = {}
 	self.activeFrame = nil
 end
 
@@ -33,18 +33,22 @@ function trabbit:draw()
 	end
 
 	if self.isFlipped == false then 
-		love.graphics.draw(self.image, self.activeFrame, self.x, self.y)
+		love.graphics.draw(self.image, self.breathing[self.activeFrame], self.x, self.y)
 	else 
-		love.graphics.draw(self.image, self.activeFrame, self.x, self.y, rotation, -1, 1)
+		love.graphics.draw(self.image, self.breathing[self.activeFrame], self.x, self.y, rotation, -1, 1)
 	end
 	
 end
 
 function trabbit:setSprites()
-	self.walking[1] = love.graphics.newQuad(0, 1, 38, 30)
-	--self.walking[2] = love.graphics.newQuad(35, 0, 38, 31, this.image:getDimensions())
-	--self.walking[3] = self.walking[1]
-	--self.walking[4] = love.graphics.newQuad(109, 2, 38, 30, this.image:getDimensions())
+	self.breathing[1] = love.graphics.newQuad(0, 1, 35, 32)
+	self.breathing[2] = love.graphics.newQuad(35, 0, 35, 33)
+	self.breathing[3] = self.breathing[1]
+	self.breathing[4] = love.graphics.newQuad(109, 2, 35, 32)
 
-	self.activeFrame = self.walking[1]
+	self.activeFrame = 1
+end
+
+function trabbit:update()
+	self.activeFrame = ((self.activeFrame + 1) % 4) + 1
 end

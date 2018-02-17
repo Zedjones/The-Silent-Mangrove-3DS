@@ -59,4 +59,5 @@ function love.update(dt)
 	twidth, tlength = objects["trabbit"]:getDimensions()
 	collision = areColliding(objects["door1"], objects["trabbit"])
 	testDown = love.keyboard.isDown("a")
+	objects["trabbit"]:update()
 end

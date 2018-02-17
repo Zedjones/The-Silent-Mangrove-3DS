@@ -2,7 +2,7 @@ Dimensions for the sprite sheet
 	Trabbit
 
 		Breath1
-			0, 1, 38, 30
+			0, 1, 35, 32
 		Breath2
 			35, 0, 38, 31
 		Breath3 (same as Breath1)
