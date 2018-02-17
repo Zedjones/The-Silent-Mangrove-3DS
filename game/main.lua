@@ -1,6 +1,7 @@
 class = require 'lib.middleclass'
 util = require 'lib.util'
 require 'lib.physics'
+require 'lib.collisions'
 
 require 'classes.entity'
 require 'classes.trabbit'
@@ -35,7 +36,7 @@ function love.draw()
 	if testDown then 
 		love.graphics.print("A is down", 100, 200, 100)
 	else
-		if #collision > 0 then 
+		if collision then 
 			love.graphics.print("Collision", 100, 200, 100)  
 		else
 			love.graphics.print("No collision", 100, 200, 100)
@@ -54,6 +55,6 @@ function love.update(dt)
 	width, length = objects["door2"]:getDimensions()
 	tx, ty = objects["trabbit"]:getPosition() 
 	twidth, tlength = objects["trabbit"]:getDimensions()
-	collision = checkrectangle(x, y, width*2, length*2, {"trabbit"})
+	collision = areColliding(objects["door1"], objects["trabbit"])
 	testDown = love.keyboard.isDown("a")
 end

@@ -18,6 +18,8 @@ function entity:init(x, y)
 
 	self.invincible = false 
 
+	self.isFlipped = false
+
 end
 
 function entity:getName()
@@ -34,6 +36,14 @@ end
 
 function entity:getDimensions()
 	return self.width, self.length
+end
+
+function entity:getWidth()
+	return self.width 
+end
+
+function entity:flipped()
+	return self.isFlipped
 end
 
 function entity:changeLife(offset)

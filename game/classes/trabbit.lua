@@ -7,9 +7,6 @@ function trabbit:init(x, y)
 
 	self.width = 38
 	self.length = 30
-
-	self.isFlipped = false
-	self.active = true
 end
 
 function trabbit:draw()
@@ -22,14 +19,14 @@ function trabbit:draw()
 	if love.keyboard.isDown("cpadright") or love.keyboard.isDown("right") then 
 		self.x = self.x + 1
 		if self.isFlipped == true then 
-			self.x = self.x - 38
+			self.x = self.x - self.width 
 		end
 		self.isFlipped = false
 	end
 	if love.keyboard.isDown("cpadleft") or love.keyboard.isDown("left") then 
 		self.x = self.x - 1
 		if self.isFlipped == false then 
-			self.x = self.x + 38
+			self.x = self.x + self.width
 		end
 		self.isFlipped = true 
 	end
