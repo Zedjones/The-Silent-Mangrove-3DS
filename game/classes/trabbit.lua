@@ -24,6 +24,7 @@ function trabbit:init(x, y)
 	self.currState = self.stateEnum["breathing"]
 	self.prevInput = {}
 	self.currInput = {}
+	self.wasFlipped = false
 end
 
 --[[
@@ -51,6 +52,7 @@ function trabbit:draw()
 	end
 	--print the active frame for debugging 
 	love.graphics.print(tostring(self.activeFrame), 100, 50)
+	love.graphics.print(tostring(switched_dir), 100, 70)
 end
 
 --[[
@@ -76,8 +78,20 @@ end
 -- trabbit  
 --]]
 function trabbit:update()
+	if self.isFlipped ~= nil then 
+		self.wasFlipped = self.isFlipped
+		end
 	if self.currInput ~= nil then 
-		self.prevInput = self.currInput 
+		for j in pairs(self.prevInput) do 
+			self.prevInput[j] = nil
+		end
+		for l in pairs(self.currInput) do 
+			self.prevInput[l] = self.currInput[l]
+		end 
+	else 
+		for j in pairs(self.prevInput) do 
+			self.prevInput[j] = nil
+		end
 	end
 	for k in pairs(self.currInput) do 
 		self.currInput[k] = nil 
@@ -142,8 +156,8 @@ function trabbit:update()
 		end
 	end
 
-	local switched_state = false 
-	local switched_dir = false 
+	switched_state = false 
+	switched_dir = false 
 	if #self.prevInput == 0 and self.currInput["right"] ~= nil then 
 		switched_state = true
 	end
@@ -156,7 +170,10 @@ function trabbit:update()
 	if self.prevInput["right"] ~= nil and self.currInput["left"] ~= nil then 
 		switched_dir = true
 	end
-
+	if self.isFlipped == false and self.wasFlipped == true or 
+		self.isFlipped == true and self.wasFlipped == false then 
+		switched_dir = true 
+	end
 	if switched_state then 
 		if self.currState ~= self.stateEnum["walking"] then 
 			self.currState = self.stateEnum["walking"]		
