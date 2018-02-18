@@ -13,7 +13,7 @@ function trabbit:init(x, y)
 
 	self.breathing = {}
 	self.walking = {}
-	self.prevTime = start
+	self.time = 0
 
 	self.stateEnum = {
 		breathing = 0,
@@ -77,22 +77,21 @@ end
 -- Function to update the position and correct texture of the 
 -- trabbit  
 --]]
-function trabbit:update()
+function trabbit:update(dt)
+	self.time = self.time + dt
 	if self.isFlipped ~= nil then 
 		self.wasFlipped = self.isFlipped
 		end
-	if self.currInput ~= nil then 
-		for j in pairs(self.prevInput) do 
-			self.prevInput[j] = nil
-		end
-		for l in pairs(self.currInput) do 
-			self.prevInput[l] = self.currInput[l]
-		end 
+	--if self.currInput ~= nil then 
+	for j in pairs(self.prevInput) do 
+		self.prevInput[j] = self.currInput[j]
+	end	--[[
 	else 
 		for j in pairs(self.prevInput) do 
 			self.prevInput[j] = nil
 		end
 	end
+	--]]
 	for k in pairs(self.currInput) do 
 		self.currInput[k] = nil 
 	end
@@ -128,6 +127,7 @@ function trabbit:update()
 		self.currInput["left"] = true
 	end
 
+	--[[
 	--if time is not null, set previous time to time 
 	if time ~= nil then 
 		self.prevTime = time
@@ -137,6 +137,14 @@ function trabbit:update()
 	if time - self.prevTime == 0 then 
 		return 
 	end
+	--]]
+	
+	if self.time > .5 then 
+		self.time = 0 
+	else 
+		return 
+	end
+		
 	--update current frame every second 
 	self.activeFrame = (self.activeFrame + 1) % 4
 	--logic for the different breathing frames
@@ -156,8 +164,16 @@ function trabbit:update()
 		end
 	end
 
+	if self.currState == self.stateEnum["walking"] then 
+		if self.activeFrame == 4 then 
+			self.y = self.y - 1
+		elseif self.activeFrame == 1 then 
+			self.y = self.y + 1
+		end 
+	end
+
 	switched_state = false 
-	switched_dir = false 
+	local switched_dir = false 
 	if #self.prevInput == 0 and self.currInput["right"] ~= nil then 
 		switched_state = true
 	end
@@ -177,12 +193,20 @@ function trabbit:update()
 	if switched_state then 
 		if self.currState ~= self.stateEnum["walking"] then 
 			self.currState = self.stateEnum["walking"]		
+			self.y = self.y + 1
+			if self.activeFrame == 2 then 
+				self.y = self.y + 1
+			end
+			if self.activeFrame == 4 then 
+				self.y = self.y - 1
+			end
 			self.activeFrame = 1 
 		end  
 	else 
 		if self.currState ~= self.stateEnum["breathing"] then 
 			self.currState = self.stateEnum["breathing"] 
 			self.activeFrame = 1 
+			self.y = self.y - 1
 		end
 	end
 
