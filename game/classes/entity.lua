@@ -23,6 +23,8 @@ function entity:init(x, y)
 
 	self.isFlipped = false
 
+	self.maxHealth = 1
+
 end
 
 --[[
@@ -53,6 +55,10 @@ function entity:flipped()
 	return self.isFlipped
 end
 
+function entity:getLife()
+	return self.health
+end
+
 --[[
 -- Function to take or remove damage 
 -- @param offset - the amount to change health by 
@@ -65,6 +71,8 @@ function entity:changeLife(offset)
 	if self.health <= 0 then 
 		self.health = 0
 		self.alive = false 
+	elseif self.health > self.maxHealth then 
+		self.health = self.maxHealth 
 	end 
 end 
 

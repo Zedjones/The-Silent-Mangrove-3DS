@@ -21,6 +21,8 @@ function trabbit:init(x, y)
 		jumping = 2	
 	}
 
+	self.maxHealth = 3
+
 	self.currState = self.stateEnum["breathing"]
 	self.prevInput = {}
 	self.currInput = {}

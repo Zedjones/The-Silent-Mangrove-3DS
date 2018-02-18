@@ -77,6 +77,7 @@ end
 --]]
 function love.update(dt)
 	objects["trabbit"]:update(dt)
+	objects["chest"]:update()
 	--get some debug info on positions and dimensions  
 	x, y = objects["door2"]:getPosition()
 	width, length = objects["door2"]:getDimensions()

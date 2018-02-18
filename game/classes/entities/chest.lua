@@ -23,8 +23,18 @@ function chest:draw()
 	else 
 		love.graphics.draw(self.image, self.states["closed"], self.x, self.y)
 	end
+	love.graphics.print(tostring(objects["trabbit"]:getLife()), 100, 150)
 end
 
 function chest:open()
 	self.isOpen = true
-end					
+end				
+
+function chest:update()
+	local collision = areColliding(self, objects["trabbit"])
+	local isDown = love.keyboard.isDown("a")
+	if collision and isDown and self.isOpen == false then 
+		chest.open(self)
+		objects["trabbit"]:changeLife(1)
+	end 
+end
