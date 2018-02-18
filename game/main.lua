@@ -17,10 +17,13 @@ function love.load()
 	--load the spritesheet
 	spriteSheet = love.graphics.newImage("graphics/SpriteSheet01.png")
 	--create the two doors, as well as setting door images
+	--door_test1 = door:new(10, 10)
+	--door_test1:setImage(love.graphics.newImage("graphics/door.png"))
+	--door_test2 = door:new(20, 10)
+	--door_test2:setImage(love.graphics.newImage("graphics/door.png"))
 	door_test1 = door:new(10, 10)
-	door_test1:setImage(love.graphics.newImage("graphics/door.png"))
-	door_test2 = door:new(20, 10)
-	door_test2:setImage(love.graphics.newImage("graphics/door.png"))
+	door_test1:setImage(spriteSheet)
+	door_test1:setSprites()
 	chest_test = chest:new(90, 50) 
 	chest_test:setImage(spriteSheet)
 	chest_test:setSprites()
@@ -33,7 +36,7 @@ function love.load()
 	--keep array to hold the objects
 	objects = {}
 	objects["door1"] = door_test1
-	objects["door2"] = door_test2
+	--objects["door2"] = door_test2
 	objects["trabbit"] = trabbit_test
 	objects["chest"] = chest_test
 end 
@@ -51,7 +54,7 @@ function love.draw()
 	love.graphics.setColor(255, 255, 255)
 	--call draw methods for each object 
 	objects["door1"]:draw()
-	objects["door2"]:draw()
+	--objects["door2"]:draw()
 	objects["chest"]:draw()
 	objects["trabbit"]:draw()
 	--test whether or not A is down and whether or not 
@@ -79,8 +82,8 @@ function love.update(dt)
 	objects["trabbit"]:update(dt)
 	objects["chest"]:update()
 	--get some debug info on positions and dimensions  
-	x, y = objects["door2"]:getPosition()
-	width, length = objects["door2"]:getDimensions()
+	x, y = objects["door1"]:getPosition()
+	width, length = objects["door1"]:getDimensions()
 	tx, ty = objects["trabbit"]:getPosition() 
 	twidth, tlength = objects["trabbit"]:getDimensions()
 	--test whether or not door1 and trabbit are colliding 

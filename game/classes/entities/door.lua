@@ -19,6 +19,7 @@ function door:init(x, y)
 
 	--door is active by default 
 	self.active = true
+
 end
 
 --[[
@@ -28,4 +29,12 @@ end
 --]]
 function door:setNextArea(area)
 	self.nextArea = area
+end
+
+function door:setSprites()
+	self.doorQuad = love.graphics.newQuad(0, 215, 24, 33)
+end
+
+function door:draw()
+	love.graphics.draw(self.image, self.doorQuad, self.x, self.y)
 end
