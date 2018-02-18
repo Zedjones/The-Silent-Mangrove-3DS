@@ -21,6 +21,9 @@ function love.load()
 	door_test1:setImage(love.graphics.newImage("graphics/door.png"))
 	door_test2 = door:new(20, 10)
 	door_test2:setImage(love.graphics.newImage("graphics/door.png"))
+	chest_test = chest:new(90, 50) 
+	chest_test:setImage(spriteSheet)
+	chest_test:setSprites()
 	background = love.graphics.newImage("graphics/Background.png")
 	background_quad = love.graphics.newQuad(0, 0, 400, 240)
 	--load the trabbit, set the image to sprite sheet, and load the sprites
@@ -32,6 +35,7 @@ function love.load()
 	objects["door1"] = door_test1
 	objects["door2"] = door_test2
 	objects["trabbit"] = trabbit_test
+	objects["chest"] = chest_test
 end 
 
 --[[
@@ -48,6 +52,7 @@ function love.draw()
 	--call draw methods for each object 
 	objects["door1"]:draw()
 	objects["door2"]:draw()
+	objects["chest"]:draw()
 	objects["trabbit"]:draw()
 	--test whether or not A is down and whether or not 
 	--there is a collision between the trabbit and the door
@@ -62,7 +67,6 @@ function love.draw()
 	end
 	--draw some debugging info 
 	love.graphics.setColor(255, 255, 255)
-	love.graphics.print(trabbit_test:getName(), 100, 100, 100)
 	love.graphics.setScreen('bottom')
 	love.graphics.print(math.floor(x) .. " " .. math.floor(y) .. " " .. width .. " " .. length, 100, 10)
 	love.graphics.print(math.floor(tx) .. " " .. math.floor(ty) .. " " .. twidth .. " " .. tlength, 100, 30)

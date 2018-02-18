@@ -51,8 +51,8 @@ function trabbit:draw()
 		end 
 	end
 	--print the active frame for debugging 
-	love.graphics.print(tostring(self.activeFrame), 100, 50)
-	love.graphics.print(tostring(switched_dir), 100, 70)
+	--love.graphics.print(tostring(self.activeFrame), 100, 50)
+	--love.graphics.print(tostring(switched_dir), 100, 70)
 end
 
 --[[
@@ -60,10 +60,10 @@ end
 -- regular active frame 
 --]]
 function trabbit:setSprites()
-	self.breathing[1] = love.graphics.newQuad(0, 1, 35, 32)
-	self.breathing[2] = love.graphics.newQuad(35, 0, 35, 33)
+	self.breathing[1] = love.graphics.newQuad(0, 1, 35, 31)
+	self.breathing[2] = love.graphics.newQuad(35, 0, 35, 32)
 	self.breathing[3] = self.breathing[1]
-	self.breathing[4] = love.graphics.newQuad(109, 2, 35, 32)
+	self.breathing[4] = love.graphics.newQuad(109, 2, 35, 30)
 
 	self.walking[1] = love.graphics.newQuad(0, 33, 35, 32)
 	self.walking[2] = love.graphics.newQuad(35, 33, 37, 32)
@@ -127,18 +127,8 @@ function trabbit:update(dt)
 		self.currInput["left"] = true
 	end
 
-	--[[
-	--if time is not null, set previous time to time 
-	if time ~= nil then 
-		self.prevTime = time
-	end
-	--get current time in seconds 
-	time = math.floor(love.timer.getTime())
-	if time - self.prevTime == 0 then 
-		return 
-	end
-	--]]
-	
+	--only change the frame if there has been half a second elapsed 
+	--since last change 
 	if self.time > .5 then 
 		self.time = 0 
 	else 
@@ -152,6 +142,8 @@ function trabbit:update(dt)
 		self.activeFrame = 4
 	end
 
+	--if the current state is breathing then accomodate the different 
+	--sprite sizes 
 	if self.currState == self.stateEnum["breathing"] then 
 		if self.activeFrame == 4 then 
 			self.y = self.y + 1
@@ -164,6 +156,7 @@ function trabbit:update(dt)
 		end
 	end
 
+	--same with walking 
 	if self.currState == self.stateEnum["walking"] then 
 		if self.activeFrame == 4 then 
 			self.y = self.y - 1
@@ -172,27 +165,37 @@ function trabbit:update(dt)
 		end 
 	end
 
+	--keep track of whether or not we have switched from 
+	--breathing to walking 
 	switched_state = false 
 	local switched_dir = false 
+	--if there was no previous input and now we have begun to move
+	--left or right, then we have switched states 
 	if #self.prevInput == 0 and self.currInput["right"] ~= nil then 
 		switched_state = true
 	end
 	if #self.prevInput == 0 and self.currInput["left"] ~= nil then 
 		switched_state = true
 	end
+	--TODO fix this, currently not working properly 
 	if self.prevInput["left"] ~= nil and self.currInput["right"] ~= nil then 
 		switched_dir = true
 	end
 	if self.prevInput["right"] ~= nil and self.currInput["left"] ~= nil then 
 		switched_dir = true
 	end
+	--TODO fix this, currently not working properly 
 	if self.isFlipped == false and self.wasFlipped == true or 
 		self.isFlipped == true and self.wasFlipped == false then 
 		switched_dir = true 
 	end
+	
+	--if the state has switched 
 	if switched_state then 
+		--if the new state is walking 
 		if self.currState ~= self.stateEnum["walking"] then 
 			self.currState = self.stateEnum["walking"]		
+			--make some changes to adjust for the sprite size 
 			self.y = self.y + 1
 			if self.activeFrame == 2 then 
 				self.y = self.y + 1
@@ -202,7 +205,8 @@ function trabbit:update(dt)
 			end
 			self.activeFrame = 1 
 		end  
-	else 
+	else
+		--do the same for breathing 
 		if self.currState ~= self.stateEnum["breathing"] then 
 			self.currState = self.stateEnum["breathing"] 
 			self.activeFrame = 1 
@@ -210,6 +214,7 @@ function trabbit:update(dt)
 		end
 	end
 
+	--TODO fix this, currently not working properly 
 	if switched_dir then 
 		self.activeFrame = 1
 	end
