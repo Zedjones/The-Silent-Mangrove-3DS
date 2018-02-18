@@ -55,7 +55,7 @@ function trabbit:draw()
 		end 
 	end
 	--print the active frame for debugging 
-	--love.graphics.print(tostring(self.activeFrame), 100, 50)
+	love.graphics.print(tostring(self.activeFrame), 100, 50)
 	--love.graphics.print(tostring(switched_dir), 100, 70)
 end
 
@@ -158,15 +158,6 @@ function trabbit:update(dt)
 		elseif self.activeFrame == 1 then 
 			self.y = self.y - 1
 		end
-	end
-
-	--same with walking 
-	if self.currState == self.stateEnum["walking"] then 
-		if self.activeFrame == 4 then 
-			self.y = self.y - 1
-		elseif self.activeFrame == 1 then 
-			self.y = self.y + 1
-		end 
 	end
 
 	--keep track of whether or not we have switched from 
